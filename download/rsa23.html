@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>RSA Cryptosystem</title>
+<meta name="author" content="Monish Singhal"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/dracula.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<style> :root {--r-heading-margin: 20px 0 20px 0; --r-heading-color: #01fa73}</style>
+<style> .bg-img {height: 150px; top: 75%; float: right; position:relative;}</style>
+<script src="./rsa.js"> </script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><section id="sec-title-slide" style="top: 153px; display: block;" class="present"><h1 class="title">RSA Cryptosystem</h1><h3 class="author">Monish Singhal</h3></section>
+</section>
+
+
+<section>
+<section id="slide-org50928f7">
+<h2 id="org50928f7">Why a new cryptosystem?</h2>
+<ul>
+<li>Weakness in existing cryptosystems</li>
+<li>Text can be mapped to numbers easily &#x2013;  Usage of number theory</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org2ce3b95">
+<h2 id="org2ce3b95">The basics</h2>
+<div class="outline-text-2" id="text-org2ce3b95">
+</div>
+</section>
+<section id="slide-org79781a6">
+<h3 id="org79781a6">Primes and co-primes</h3>
+<aside class="notes">
+<p>
+I hope everyone knows this, so I wouldn't need to cover it in too much depth.
+An important notation though is |: d|n means d divides n. So, for example, 5|15.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-orge8f8021">
+<h3 id="orge8f8021">Modular Arithmatic</h3>
+<ul>
+<li>\(a \equiv r \pmod{N}\) where \(a = qN + r\)</li>
+
+</ul>
+<aside class="notes">
+<p>
+Modular arithematic, particularly in the domain of primes, becomes very important for cryptography. This is because, under the modulo of a prime, we obtain a finite field (which I will now refer to as a Galois field). Why is this important? I will return to this question in a bit.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org756af0b">
+<h3 id="org756af0b">Modular Division</h3>
+<ul>
+<li>\(a \cdot a^{-1} \equiv 1 \pmod{N}\)</li>
+<li>EGCD Algorithm to find the inverse</li>
+
+</ul>
+<aside class="notes">
+<p>
+Just to refresh your memories, division is not as straightforward in modular rings. For every corresponding \(x\), we need to compute a number such that on multiplication with \(x\) in the ring, we get 1. It is rather easy to do this using the extended GCD algorithm.
+</p>
+
+</aside>
+
+</section>
+<section id="slide-org26d55a8">
+<h3 id="org26d55a8">Euler's Totient Function</h3>
+<ul>
+<li data-fragment-index="1" class="fragment appear">\(\phi(n) = \sum_{k = 1}^{n} 1\) such that \(k\) is coprime to \(n\)</li>
+<li data-fragment-index="1" class="fragment appear">Example: \(\phi(6) = 2 \{1, 5\}\)</li>
+<li data-fragment-index="2" class="fragment appear">For a prime number: \(\phi(p) = p - 1\)</li>
+<li data-fragment-index="2" class="fragment appear">Why?</li>
+<li data-fragment-index="3" class="fragment appear">For two coprime numbers \(m\) and \(n\): \(\phi(mn) = \phi(m) \phi(n)\)</li>
+<li data-fragment-index="3" class="fragment appear">Why?</li>
+
+</ul>
+<aside class="notes">
+<p>
+The Euler totient function has no particularly significant origins. It's rather simple to define. The value of the euler totient function for a number is merely the number of elements that are coprime to the number. Here, we take 1 to be coprime to all other numbers. Let us take a few examples, \(n = 6\) and \(n = 15\).
+</p>
+
+<p>
+It is rather trivial to see that the euler totient function for a prime \(p\) is merely \(p - 1\). So, we don't really need to iterate for all values to calculate the euler totient function for p.
+</p>
+
+<p>
+Something that is much harder to see is that the Euler totient function is multiplicative, that is, the product of the totient functions for two co prime numbers m and n will be the value of the totient function mn. There is a neat proof using the Chinese remainder theorem that can be found online, but I liked another visual proof that is on MathSE. Take, for example m = 5, n = 6. We draw a grid of size \(m \times n\), and then fill it in diagonally, starting from the bottom left. (fills grid). Now, we begin crossing out numbers that are not coprime to \(mn\). Observe that for every number, either the entire row is crossed out, the entire column is crossed out, or both. Also, the number of rows and columns is equal to \(\phi(n)\) and \(\phi(m)\) respectively. Can anyone tell why? Therefore, if we take all the numbers not crossed out, (which would form the set of all coprime numbers to \(mn\)), we get a grid of size \(\phi(n)\phi(m)\), and hence proved.
+</p>
+<ul>
+<li><a href="https://math.stackexchange.com/a/999599">https://math.stackexchange.com/a/999599</a></li>
+
+</ul>
+
+</aside>
+
+</section>
+<section id="slide-orgeae659f">
+<h3 id="orgeae659f">Euler's Theorem</h3>
+<ul>
+<li data-fragment-index="1" class="fragment appear">\(a ^ {\phi(n)} \equiv 1 \pmod{n}\)</li>
+<li data-fragment-index="1" class="fragment appear">Why?</li>
+<li data-fragment-index="2" class="fragment appear">Hint: Try finding a bijection</li>
+
+</ul>
+<aside class="notes">
+<p>
+The final bit of basics that we shall be covering is the Euler totient function. The theorem is very simple: any number raised to the power of the totient of \(n\), modulo some \(n\) would always equal 1. It is also not very hard to prove. We know that the cardinality of the set of numbers containing the modular inverses for any number is equal to the totient function, because it contains all the numbers coprime to \(n\). Therfore, we can construct a bijection to this set. How to do it is an exercise to the listener.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org9ab97e6">
+<h2 id="org9ab97e6">The Actual Cryptosystem</h2>
+<ul>
+<li>Two primes \(p\) and \(q\)</li>
+<li>\(n = pq\)</li>
+<li>\(de \equiv 1 \mod (p - 1)(q - 1)\)</li>
+
+</ul>
+<hr>
+<ul>
+<li data-fragment-index="1" class="fragment appear">Encryption: \(m^e \pmod n\)</li>
+<li data-fragment-index="2" class="fragment appear">Decryption: \(c^d \pmod n\)</li>
+
+</ul>
+<aside class="notes">
+<p>
+The actual RSA cryptosystem is incredibly simple. We take two primes, and multiply them together to get a third number \(n\). We then calculate the totient value, and pick two numbers \(e\) and \(d\) such that they are the multiplicative inverses of each other modulo \(\phi(n)\). Our public values would then be \(e\) and \(n\), and the private values would be \(d\) and \(n\).
+</p>
+
+<p>
+Encryption, thus is merely taking the message to the $e$th power, modulo \(n\). Can anyone guess what might decryption be?
+</p>
+
+<p>
+&lt;Show Jupyter notebook that was painstakingly prepared&gt;
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orge242856">
+<h2 id="orge242856">Security of the RSA</h2>
+<aside class="notes">
+<p>
+Given RSA is so simple, where does it derive its security from?
+Factoring large numbers: Generally, RSA uses very large numbers. So far, we have not be able to come up with a polynomial alogorithm to factor numbers, and it is believed that there does not exist any such algoorithm in the classical domain. However, Peter Shor has proposed a quantum algoritm that can factor numbers in polynomial time, which means RSA would be breakable with the advent of quantum computers. Finding out the totient function is also equivalent to factoring a number, and hence it becomes impossible to derive the private parameters using the public parameters.
+</p>
+
+</aside>
+</section>
+</section>
+<section>
+<section id="slide-org83654b9">
+<h2 id="org83654b9">Attacks</h2>
+<aside class="notes">
+<p>
+So, how many of you noticed some weird numbers at the top of the poster? I may or may not cover how to attack the parameters in that, so you might want to listen carefully.
+RSA does have some interesting attacks though, most of which arise due to the improper understanding of RSA. RSA is not a silver bullet that will be secure for any values, and it is imperitive to choose good paramters, for example. 
+</p>
+
+</aside>
+</section>
+<section id="slide-org43ab489">
+<h3 id="org43ab489">1. Small Values of \(m\) or \(n\)</h3>
+<ul>
+<li data-fragment-index="1" class="fragment appear">If \(m\) is small: Bruteforce</li>
+<li data-fragment-index="2" class="fragment appear">If \(n\) is small: factorise</li>
+
+</ul>
+<aside class="notes">
+<p>
+A reasonably rookie mistake with RSA is choosing very small values of \(m\) or \(n\). Lets say we choose \(n\) to be a 4096 bit prime, but our message would be, say \(10\). Even God cannot help someone trying to take \(m^e\) with \(e = 3\). Even if we take \(e = 2000\), it will still be less than \(n\), making it useless. Another attack is with small values of \(n\). If \(n\) is small enough, say a hundred bits or so, it becomes significantly easier to factorise it, and if you can factorise it, there is nothing that can protect your primes.
+</p>
+
+</aside>
+</section>
+<section id="slide-org3a91007">
+<h3 id="org3a91007">2. Unpadded Message Recovery</h3>
+<p data-fragment-index="(1)" class="fragment (appear)">
+\(C' = C \cdot S^E\), find \(P' = \text{decrypt}(C')\), and hence \(P = P' S^{-1}\)
+</p>
+<aside class="notes">
+<p>
+RSA is also multiplicative, and so, if you multiply two ciphertexts together, you can get a new ciphertext. Theoretically, this can be an attack against an oracle that only decrypts a ciphertext if it does not match a particular plaintext. &lt;switch to jupyter notebook&gt; Say, we are not allowed to decrypt some secret string. We take the ciphertext and multiply it with &lt;write on board&gt;. Can someone complete this?
+</p>
+
+</aside>
+</section>
+<section id="slide-org83197b2">
+<h3 id="org83197b2">Flipping Bits (Square CTF 2018 C2)</h3>
+<p>
+ct1:  &lt;long num 1&gt;
+ct2:  &lt;long num 2&gt;
+e1:  13
+e2:  15
+modulus:  &lt;modulo&gt;
+</p>
+
+<p>
+You have two captured ciphertexts. The public key is (e1, n). But,
+due to a transient bit flip, the second ciphertext was encrypted with a faulty
+public key: (e2, n). Recover the plaintexts.
+</p>
+<aside class="notes">
+<p>
+This demonstrates another attack, that is rather neat. &lt;switch to jupyter notebook&gt;
+</p>
+
+</aside>
+</section>
+<section id="slide-orgd258264">
+<h4 id="orgd258264">Bezout's Theorem</h4>
+<p>
+\(xa + yb = \gcd(a, b)\) for all \(a, b\)
+</p>
+</section>
+<section id="slide-org70caf63">
+<h4 id="org70caf63">The Attack</h4>
+<ul>
+<li>\(C_1 = M^{e_1}\), \(C_2 = M^{e_2}\)</li>
+<li>\(C_1^{x} \cdot C_2^{y} = M^{xe_1} \cdot M^{ye_2} = M^{\gcd(a, b)}\)</li>
+
+</ul>
+</section>
+<section id="slide-orgcfcac1d">
+<h3 id="orgcfcac1d">4. Broadcast Attacks for small values of \(e\)</h3>
+<p>
+Given some number of ciphertexts encrypting the same plaintext, knowning the values of public keys, find the plaintext
+</p>
+<aside class="notes">
+<p>
+The final attack that we will cover is the broadcast attack, that makes RSA vulnerable to small values of \(e\) being chosen. The idea behind this is capturing ciphertexts encrypted under the same set of parameters, and decrypting them. Does anyone have any ideas of how to do this?
+</p>
+
+</aside>
+</section>
+<section id="slide-org7210edb">
+<h4 id="org7210edb">Chinese Remainder Theorem</h4>
+<p>
+For a set of congruences \[x \equiv a_i \pmod n_i,\; 0 < i \leq k,\] there exists a solution, and that solution is unique under the congruence of \(N = \prod_{i = 1}^{k} n_i\), where each of \(n_i\) is pairwise coprime
+</p>
+<aside class="notes">
+<p>
+The solution to this lies in the chinese remainder theorem.
+step 1: compute the product of n<sub>i</sub>
+step 2: for all i, compute y<sub>i</sub> = N/n<sub>i</sub>
+step 3: compute z<sub>i</sub> = y<sub>i</sub> inv mod n<sub>i</sub>
+step 4: solution is x = a<sub>i</sub> y<sub>i</sub> z<sub>i</sub>
+</p>
+
+<p>
+why does this work?
+</p>
+
+</aside>
+</section>
+<section id="slide-orgbaeef3e">
+<h3 id="orgbaeef3e">Bonus: GCTF 2022 Cycling</h3>
+<ul>
+<li>Credits: <a href="https://ur4ndom.dev/posts/2022-07-04-gctf-cycling/">https://ur4ndom.dev/posts/2022-07-04-gctf-cycling/</a></li>
+
+</ul>
+</section>
+<section id="slide-orgd2304b6">
+<h4 id="orgd2304b6">Problem</h4>
+<p>
+It is well known that any RSA encryption can be undone by just encrypting the ciphertext over and over again. If the RSA modulus has been chosen badly then the number of encryptions necessary to undo an encryption is small. However, if the modulus is well chosen then a cycle attack can take much longer. This property can be used for a timed release of a message. We have confirmed that it takes a whopping 2<sup>1025</sup>-3 encryptions to decrypt the flag. Pack out your quantum computer and perform 2<sup>1025</sup>-3 encryptions to solve this challenge. Good luck doing this in 48h.
+</p>
+</section>
+<section id="slide-org524d3dd">
+<h4 id="org524d3dd">How to attack the problem?</h4>
+<ul>
+<li data-fragment-index="1" class="fragment appear">Bruteforce clearly out of the way</li>
+<li data-fragment-index="2" class="fragment appear">Need to use smart maths</li>
+
+</ul>
+</section>
+<section id="slide-orgbf43fcb">
+<h4 id="orgbf43fcb">Observations made</h4>
+<ul>
+<li>\(M^{e^{R + 1}} = M \mod {N}\)</li>
+
+</ul>
+</section>
+<section id="slide-orgc72682a">
+<h4 id="orgc72682a">Carmicheal Function</h4>
+<ul>
+<li data-fragment-index="1" class="fragment appear">\(\lambda(n)\) = smallest positive integer such that \(a^m \equiv 1 \pmod n, \forall a\) coprime to \(n\)</li>
+<li data-fragment-index="2" class="fragment appear">Observe: \(\lambda(n) | \phi(n)\), and \(\lambda(n)\) can be used in RSA</li>
+<li data-fragment-index="2" class="fragment appear">Clean expression for \(\lambda(n)\)?</li>
+
+</ul>
+</section>
+<section id="slide-org086bdae">
+<h4 id="org086bdae">More observations</h4>
+<ul>
+<li data-fragment-index="1" class="fragment appear">\(e^{R + 1} \equiv 1 \pmod{\lambda(n)}\)</li>
+<li data-fragment-index="2" class="fragment appear">Euler theorem vibes?</li>
+
+</ul>
+</section>
+<section id="slide-org9d3b46d">
+<h4 id="org9d3b46d">Assumptions pt. 1</h4>
+<ul>
+<li>\(R + 1 = \lambda(\lambda(n))\)?</li>
+
+</ul>
+</section>
+<section id="slide-orga1ba9b5">
+<h4 id="orga1ba9b5">More observations pt. 2</h4>
+<ul>
+<li data-fragment-index="1" class="fragment appear">\[R + 1 = \lambda(\lambda(n)) = \mathrm{lcm}(s_1 - 1, \ldots, s_m -1)\]</li>
+<li data-fragment-index="2" class="fragment appear">Factorising: <a href="http://factordb.com/index.php?query=2%5E1025+-+2">http://factordb.com/index.php?query=2%5E1025+-+2</a></li>
+
+</ul>
+</section>
+<section id="slide-org677eda9">
+<h4 id="org677eda9">Final Solution?</h4>
+<ul>
+<li data-fragment-index="1" class="fragment appear">Lazy approach: Find \[\prod_{i = 1}^{m} s_i\], use that as exponent</li>
+<li data-fragment-index="2" class="fragment appear">Actual Solution: Pollard's \(p - 1\) Algorithm to factorise numbers</li>
+
+</ul>
+</section>
+<section id="slide-org97331d6">
+<h4 id="org97331d6">Implicit Assumptions</h4>
+<ul>
+<li>\(p - 1\), \(q - 1\) were square-free</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>

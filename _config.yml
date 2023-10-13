@@ -1,8 +1,8 @@
-title: "jekyll-shell-theme"
-tagline: "A jekyll theme that looks like a shell/terminal"
-description: "This is a preview of jekyll-shell-theme."
-github_username: tareqdandachi
-baseurl: "/jekyll-shell-theme"
+title: "0x1337"
+tagline: "The IIITH Hacking Club"
+description: "Exploiting vulnerabilities for fun and teaching about security in today's world"
+github_username: notrudyyy
+baseurl: ""
 url: "https://tareqdandachi.github.io"
 
 plugins:
@@ -18,7 +18,9 @@ highlighter: rouge
 header_pages:
   - index.md
   - read-me.md
-  - preview.md
+  - members.md
+  - events.md
+  - writeups.md
 
 # set the size of the text to 'large' or 'small', default is small
 font-size: small
