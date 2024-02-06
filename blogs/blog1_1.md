@@ -1,8 +1,8 @@
 ---
 layout: post
 post-title: "Microsoft Exposes Russian-Linked 'Nobelium' Cybersecurity Breach: Executives' Emails Compromised"
-permalink: /blog1_1
-detail_image: assets/images/blog1_1.png
+permalink: blogs/1_1
+detail_image: ../assets/images/blog1_1.png
 title: Blog
 ---
 
