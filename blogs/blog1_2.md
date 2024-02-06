@@ -1,8 +1,8 @@
 ---
 layout: post
 post-title: "Meta formerly Facebook, X formerly Twitter, Microsoft and Snap all support KOSA ( Kids Online Safety Act )"
-permalink: /blog1_2
-detail_image: assets/images/blog1_2.png
+permalink: blogs/1_2
+detail_image: ../assets/images/blog1_2.png
 title: Blog
 ---
 

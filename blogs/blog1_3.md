@@ -1,8 +1,8 @@
 ---
 layout: post
 post-title: "Indonesian Cyber Activists Target Indian Government: Recent Surge in Attacks Linked to Israel-Hamas Conflict Standoff"
-permalink: /blog1_3
-detail_image: assets/images/blog1_3.png
+permalink: blogs/1_3
+detail_image: ../assets/images/blog1_3.png
 title: Blog
 ---
 
