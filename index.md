@@ -4,7 +4,7 @@ permalink: /
 permalink_name: /home
 title: "0x1337: The Hacking Club"
 
-detail_image: assets/theme_logo.svg
+detail_image: assets/hacking.png
 
 ---
 

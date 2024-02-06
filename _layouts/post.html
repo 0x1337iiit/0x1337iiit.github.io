@@ -2,9 +2,7 @@
 layout: default
 title:  "POSTS"
 ---
-
+<h1><u>{{ page.post-title }}</u></h1>
+<br>
 {%- if page.detail_image -%}<img class="detail_header" src="{{ page.detail_image }}">{%- endif -%}
-
-<h1>{{ page.post-title }}</h1>
-
 {{ content }}
