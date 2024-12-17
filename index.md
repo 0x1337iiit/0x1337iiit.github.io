@@ -17,3 +17,5 @@ No prior knowledge is required to start learning about cybersecurity, just read 
 You can see some of our previous and upcoming events in [/events](events).
 
 Check out our amazing team in [/members](members).
+
+## Check out our latest upcoming CTF [TheDeccanCTF](/ctf)
