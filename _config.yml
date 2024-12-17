@@ -1,9 +1,9 @@
 title: "0x1337"
 tagline: "The IIITH Hacking Club"
 description: "Exploiting vulnerabilities for fun and teaching about security in today's world"
-github_username: notrudyyy
+github_username: ""
 baseurl: ""
-url: "https://tareqdandachi.github.io"
+url: "https://0x1337iiit.github.io"
 
 plugins:
   - jemoji
