@@ -8,7 +8,7 @@ title: TheDeccanCTF
 ## CTF Details
 This is an ***<u>onsite</u>*** CTF in the heart of hyderabad's tech centre Gachibowli!
 
-Timings: 18th January 2025 1pm - 19th January 2025 2pm 
+Timings: 8th February 2025 1pm - 9th February 2025 2pm 
 
 Format: Jeopardy
 
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const minutesEl = document.getElementById('minutes');
     const secondsEl = document.getElementById('seconds');
 
-    const targetDate = new Date('2025-01-18T13:00:00').getTime(); // Set your target date here
+    const targetDate = new Date('2025-02-08T13:00:00').getTime(); // Set your target date here
 
     function updateCountdown() {
         const now = new Date().getTime();
