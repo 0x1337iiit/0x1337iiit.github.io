@@ -5,8 +5,7 @@ permalink_name: /ctf
 title: TheDeccanCTF
 detail_image: ../assets/images/draft6.png
 ---
-<centre>
-</centre>
+
 ## CTF Details
 This is an ***<u>onsite</u>*** CTF in the heart of hyderabad's tech centre Gachibowli!
 
@@ -68,6 +67,8 @@ This contains all the challenge files. You MUST download this and come to the ve
 - Food will most likely not be provided, external stalls might be arranged and college canteen is at least open till 11:30pm midnight. Please bring snacks etc if required. However you must eat anything outside venue, there are spaces available nearby.
 - No sleeping accomodation is there, you are meant to grind through the night after all ⚒️
 
+<center>
+<button class="button-64" role="button" onClick="window.open('https://forms.office.com/r/NPUyhnxFk5')"><span class="text">Register</span></button>
 <br/>
 <div id="countdown-container" style="
     display: inline-flex;
@@ -157,6 +158,7 @@ This contains all the challenge files. You MUST download this and come to the ve
         </div>
     </div>
 </div>
+</center>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
