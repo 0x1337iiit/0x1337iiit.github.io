@@ -20,11 +20,13 @@ This is a Capture The Flag competition where you have to solve various cybersecu
 
 **Competition Format:** Jeopardy
 
-**Difficulty:** Easy-Medium (We do still have a decent amount of hard questions)
+**Difficulty:** Easy-Medium (decent amount of hard questions are still included)
 
 **Team Size:**
 - **Max:** 5
-- **Min:** 1 (2-3 should be good enough)
+- **Min:** 1
+
+(2-3 is also probably good enough)
 
 It is a completely offline event where everyone from IIIT and outside IIIT are also allowed to participate.
 
@@ -39,7 +41,7 @@ It is a completely offline event where everyone from IIIT and outside IIIT are a
 - **1st Team:** 1.5k Rs Card
 - **Top 13 Teams:** One .xyz domain!
 
-The prize pool is tentative and will probably be increased significantly.
+There is a chance that the prize pool will be increased in which case info will be updated here and everyone will be informed in the venue before CTF starts. 
 
 Each team eligible for the beginner category will be given the choice to compete in the open category as well. Such teams can only participate in one category. Note that once the registration ends, changing category will not be possible.
 
