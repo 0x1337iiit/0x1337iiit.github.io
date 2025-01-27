@@ -50,6 +50,8 @@ There will be 3 explicitly marked challenges. For each such marked challenge, th
 
 Note that prizes are partially/fully in the form of Amazon vouchers/gift cards.
 
+# Venue: H-205, Himalaya block, IIIT-H, Gachibowli
+
 <h1>Rules</h1>
 - No bruteforcing/fuzzing any infra unless allowed explicitly.
   **We have made all challenges such that these techniques will not be required, and if required we will explicitly inform you in the question itself and/or in the hall.**
@@ -68,8 +70,7 @@ Note that prizes are partially/fully in the form of Amazon vouchers/gift cards.
 - No sleeping accommodation is there, you are meant to grind through the night after all ⚒️
 
 
-# Seats are limited register now.
-
+# Seats are limited, register now.
 
 <center>
 <button class="button-64" role="button" onClick="window.open('https://forms.office.com/r/NPUyhnxFk5')"><span class="text">Register</span></button>
