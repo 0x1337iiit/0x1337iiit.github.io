@@ -12,6 +12,8 @@ This is an ***<u>onsite</u>*** CTF in the heart of Hyderabad's tech centre Gachi
 
 TheDeccanCTF is the new flagship event of 0x1337 TheHackingClub!
 
+# Registration link ? Read everything first, its below
+
 **Schedule:**
 - **1-3pm:** Talks and Demonstrations
 - **3pm-10:30am (Overnight):** CTF Competition
