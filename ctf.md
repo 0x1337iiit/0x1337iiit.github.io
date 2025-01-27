@@ -35,11 +35,11 @@ It is a completely offline event where everyone from IIIT and outside IIIT are a
 **Open Category:**
 - **1st Team:** 4.5k Rs Card
 - **2nd Team:** 3k Rs Card
-- **Top 37 Teams:** One .xyz domain!
+- **Top 37 Teams:** One .xyz domain! (1 yr subscription)
 
 **Beginner Category** (Teams with each member currently studying in Undergraduate year 1 or lesser) [Must be able to produce proof if non-IIIT student]:
 - **1st Team:** 1.5k Rs Card
-- **Top 13 Teams:** One .xyz domain!
+- **Top 13 Teams:** One .xyz domain! (1 yr subscription)
 
 There is a chance that the prize pool will be increased in which case info will be updated here and everyone will be informed in the venue before CTF starts. 
 
@@ -66,6 +66,10 @@ Note that prizes are partially/fully in the form of Amazon vouchers/gift cards.
 - Download all tools etc beforehand.
 - Food will most likely not be provided, external stalls might be arranged and the college canteen is at least open till 11:30pm midnight. Please bring snacks etc if required. However, you must eat anything outside the venue, there are spaces available nearby.
 - No sleeping accommodation is there, you are meant to grind through the night after all ⚒️
+
+
+# Seats are limited register now.
+
 
 <center>
 <button class="button-64" role="button" onClick="window.open('https://forms.office.com/r/NPUyhnxFk5')"><span class="text">Register</span></button>
