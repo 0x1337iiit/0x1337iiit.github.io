@@ -19,3 +19,12 @@ You can see some of our previous and upcoming events in [/events](events).
 Check out our amazing team in [/members](members).
 
 ## Check out our latest upcoming CTF [TheDeccanCTF](/ctf)
+
+<br>
+
+# Community partner:
+
+<a href='https://thehackersmeetup.org/'><img src="./assets/thm_white.png" height='60vw' /> </a>
+The Hackers Meetup is a fantastic initiative that conducts regular meetups in various cities across India, featuring experienced speakers and delivering engaging content. Known for being beginner-friendly and highly supportive, they are a great resource for anyone interested in cybersecurity and hacking.
+
+Take a look at their work, and consider attending their events to expand your knowledge and network with like-minded individuals.
