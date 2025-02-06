@@ -72,11 +72,11 @@ Note that prizes are partially/fully in the form of Amazon vouchers/gift cards.
 - No sleeping accommodation is there, you are meant to grind through the night after all ⚒️
 
 
-# Seats are limited, register now.
+# Registrations are closed. The below timer is the time left for the event to start
 
 <center>
-<button class="button-64" role="button" onClick="window.open('https://forms.office.com/r/NPUyhnxFk5')"><span class="text">Register</span></button>
-<br/>
+ 
+ <br/>
 <div id="countdown-container" style="
     display: inline-flex;
     align-items: center;
