@@ -21,6 +21,7 @@ header_pages:
   - members.md
   - events.md
   - writeups.md
+  - links.md
 
 # set the size of the text to 'large' or 'small', default is small
 font-size: small
