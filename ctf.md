@@ -6,6 +6,17 @@ title: TheDeccanCTF
 detail_image: ../assets/images/draft6.png
 ---
 
+<script>
+// Immediate redirect to the new CTF location
+window.location.replace("https://felicity.iiit.ac.in/deccanctf");
+</script>
+
+<noscript>
+<!-- Fallback for users with JavaScript disabled -->
+<meta http-equiv="refresh" content="0; url=https://felicity.iiit.ac.in/deccanctf">
+<p>Redirecting to <a href="https://felicity.iiit.ac.in/deccanctf">https://felicity.iiit.ac.in/deccanctf</a>...</p>
+</noscript>
+
 ## CTF Details
 
 This is an ***<u>onsite</u>*** CTF in the heart of Hyderabad's tech centre Gachibowli!
