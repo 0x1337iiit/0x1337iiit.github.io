@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Camera Feed</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom style for the video feed to ensure it's mirrored if it's the front camera */
+        .camera-feed.user-facing {
+            transform: scaleX(-1);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-2xl text-center">
+        <h1 class="text-3xl md:text-4xl font-bold mb-2">Live Camera Feed</h1>
+        <p class="text-gray-400 mb-6">Request permission to view your device's camera.</p>
+
+        <!-- Video element to display the camera stream -->
+        <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border-2 border-gray-700">
+            <video id="cameraFeed" class="w-full h-auto" autoplay playsinline muted></video>
+        </div>
+
+        <!-- Container for status messages and controls -->
+        <div class="mt-6">
+            <p id="status" class="text-yellow-400 h-6 mb-4"></p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                 <button id="startButton" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+                    Start Rear Camera
+                </button>
+                 <button id="switchButton" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.6V8c0-1.1.9-2 2-2h14"/><path d="M7 21.9l-4-4 4-4"/><path d="M21 11.4V16c0 1.1-.9 2-2 2H5"/></svg>
+                    Switch Camera
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const videoElement = document.getElementById('cameraFeed');
+        const startButton = document.getElementById('startButton');
+        const switchButton = document.getElementById('switchButton');
+        const statusElement = document.getElementById('status');
+        
+        let currentStream;
+        let isUsingFrontCamera = false;
+
+        // Function to stop the current media stream tracks
+        function stopMediaTracks(stream) {
+            if (stream) {
+                stream.getTracks().forEach(track => {
+                    track.stop();
+                });
+            }
+        }
+
+        // Function to start the camera feed
+        async function startCamera(facingMode) {
+            // Stop any existing stream
+            stopMediaTracks(currentStream);
+
+            const constraints = {
+                video: {
+                    facingMode: facingMode
+                }
+            };
+            
+            statusElement.textContent = 'Requesting camera access...';
+
+            try {
+                // Check for mediaDevices support
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    throw new Error('Your browser does not support camera access.');
+                }
+                
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                currentStream = stream;
+                videoElement.srcObject = stream;
+
+                // Apply mirroring for front camera
+                if (facingMode === 'user') {
+                    videoElement.classList.add('user-facing');
+                } else {
+                    videoElement.classList.remove('user-facing');
+                }
+                
+                statusElement.textContent = '';
+                startButton.textContent = 'Stop Camera';
+                switchButton.disabled = false;
+
+            } catch (error) {
+                console.error("Error accessing camera: ", error);
+                if (error.name === "NotAllowedError" || error.name === "PermissionDeniedError") {
+                    statusElement.textContent = "Camera access denied. Please allow permission in your browser settings.";
+                } else if (error.name === "NotFoundError" || error.name === "DevicesNotFoundError") {
+                    statusElement.textContent = "No camera found on this device.";
+                } else {
+                    statusElement.textContent = "Could not access the camera. Please try again.";
+                }
+                startButton.textContent = 'Start Rear Camera';
+                switchButton.disabled = true;
+            }
+        }
+
+        // Event listener for the start/stop button
+        startButton.addEventListener('click', () => {
+            if (currentStream) {
+                stopMediaTracks(currentStream);
+                currentStream = null;
+                videoElement.srcObject = null;
+                startButton.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
+                    Start Rear Camera`;
+                statusElement.textContent = '';
+                switchButton.disabled = true;
+            } else {
+                isUsingFrontCamera = false; // Always start with rear camera
+                startCamera('environment');
+            }
+        });
+
+        // Event listener for the switch camera button
+        switchButton.addEventListener('click', () => {
+            if (currentStream) {
+                isUsingFrontCamera = !isUsingFrontCamera;
+                const facingMode = isUsingFrontCamera ? 'user' : 'environment';
+                startCamera(facingMode);
+                startButton.textContent = 'Stop Camera';
+            }
+        });
+    </script>
+</body>
+</html>
