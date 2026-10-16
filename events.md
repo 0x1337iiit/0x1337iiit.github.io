@@ -9,6 +9,12 @@ title: Events
 Stay tuned!
 
 # Past Events
+## 2026
+
+- **_OSINT Workshop_**
+   * Speakers - Sanyam A
+   * Resources - [Slides][10]
+
 ## 2023
 So far in 2023 we've organized 5 events,
 
@@ -37,3 +43,4 @@ So far in 2023 we've organized 5 events,
 [7]:https://iiitaphyd-my.sharepoint.com/:f:/g/personal/hacking_club_students_iiit_ac_in/EhfhvG4asd5An0u996e6OD0BwUXhYSlbxL7ytE4u1_kLCw?e=iOK2su
 [8]:{{ site.url }}/download/encryption23.pdf
 [9]:{{ site.url }}/download/opsec23.pdf
+[10]:{{ site.url }}/download/osint26.pdf
